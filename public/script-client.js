@@ -97,30 +97,30 @@ function mostrarMensagem(texto, tipo = 'success') {
 }
 
 // -----------------------
-// Carregar produtos da API local e inicializar menus e produtos
 async function carregarProdutos() {
   try {
-    const resposta = await fetch('/api/produtos')
-  .then(r => r.json())
-  .then(lista => { /* ... */ });
-;
-    if (!resposta.ok) throw new Error('Erro ao carregar produtos');
+    // 1) Chama a API
+    const res = await fetch('/api/produtos');
+    if (!res.ok) throw new Error(`Erro ao carregar produtos: ${res.status} ${res.statusText}`);
 
-    let dados = await resposta.json();
+    // 2) Converte em JSON
+    const lista = await res.json();
 
-    // ✅ Filtrar apenas os produtos ativos
-    produtos = dados.filter(p => p.ativo);
+    // 3) Filtra só os ativos
+    produtos = lista.filter(p => p.ativo);
 
+    // 4) Inicializa UI
     extrairCategorias();
     mostrarProdutos(produtos);
     atualizarMenusCategorias();
     atualizarResumoPedido();
+
   } catch (err) {
+    // Em caso de erro exibe mensagem na tela
     produtosContainer.innerHTML = '<p>Erro ao carregar produtos.</p>';
     console.error(err);
   }
 }
-
 
 // -----------------------
 // Extrair categorias únicas dos produtos
