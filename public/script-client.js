@@ -100,7 +100,10 @@ function mostrarMensagem(texto, tipo = 'success') {
 // Carregar produtos da API local e inicializar menus e produtos
 async function carregarProdutos() {
   try {
-    const resposta = await fetch('http://localhost:3000/produtos');
+    const resposta = await fetch('/api/produtos')
+  .then(r => r.json())
+  .then(lista => { /* ... */ });
+;
     if (!resposta.ok) throw new Error('Erro ao carregar produtos');
 
     let dados = await resposta.json();

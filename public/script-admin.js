@@ -213,7 +213,10 @@ async function deletarProduto(id) {
 // 1. Defina a função carregarProdutos
 async function carregarProdutos() {
   try {
-    const res = await fetch(urlProdutos);
+    const res = await fetch('/api/pedidos')
+  .then(r => r.json())
+  .then(lista => { /* ... */ });
+;
     produtos = await res.json();
     renderizarProdutos();
   } catch (err) {
