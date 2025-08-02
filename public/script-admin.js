@@ -209,18 +209,32 @@ async function deletarProduto(id) {
 /* =========================
    PEDIDOS
 ========================= */
-
-// 1. Defina a função carregarProdutos
 async function carregarProdutos() {
   try {
-    const res = await fetch('/api/pedidos')
-  .then(r => r.json())
-  .then(lista => { /* ... */ });
-;
-    produtos = await res.json();
-    renderizarProdutos();
+    const resposta = await fetch('/api/produtos');
+
+    if (!resposta.ok) throw new Error('Erro ao carregar produtos');
+
+    const dados = await resposta.json();
+
+    // Filtra apenas os produtos ativos (caso você use isso)
+    produtos = dados.filter(p => p.ativo);
+
+    renderizarProdutos(); // ou mostrarProdutos(produtos), se for sua função
   } catch (err) {
     console.error('Erro ao carregar produtos:', err);
+  }
+}
+
+async function carregarPedidos() {
+  try {
+    const resposta = await fetch('/api/pedidos');
+    if (!resposta.ok) throw new Error('Erro ao carregar pedidos');
+
+    const dados = await resposta.json();
+    console.log('Pedidos:', dados); // ou renderizarPedidos(dados)
+  } catch (err) {
+    console.error('Erro ao carregar pedidos:', err);
   }
 }
 
