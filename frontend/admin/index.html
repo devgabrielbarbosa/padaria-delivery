@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel Administrativo - Padaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  
+  <!-- 🔝 Header Superior -->
+  <header>
+    <div class="logo-container">
+      <a href=""><img class="logo" src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png" alt=""></a>
+       <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+  </header>
+
+
+  <main>
+  <!-- 📚 Menu Lateral -->
+  <div class="sidebar">
+    <h2>Administração</h2>
+    <button onclick="mostrarSecao('cadastro')">Cadastrar Produto</button>
+    <button onclick="mostrarSecao('produtos')">Produtos</button>
+    <button onclick="mostrarSecao('pedidos')">Pedidos</button>
+    <button onclick="mostrarSecao('finalizados')">Finalizados</button>
+    <button onclick="alternarTema()">🌙 Modo Escuro</button>
+    <button onclick="logout()">Sair</button>
+  </div>
+
+  <!-- 🔧 Conteúdo Principal -->
+  <div class="main">
+
+    <!-- 🔐 Tela de Login -->
+    <div id="telaLogin" class="card">
+      <h2>Login</h2>
+      <input type="password" id="senha" placeholder="Digite a senha" />
+      <button class="primary" onclick="verificarLogin()">Entrar</button>
+      <p id="mensagemLogin" style="color: red;"></p>
+    </div>
+
+    <!-- 📊 Painel Principal -->
+    <div id="painel" class="card hidden">
+
+      <!-- 📥 Cadastro -->
+      <div id="secao-cadastro" class="secao">
+        <h2>Cadastrar Produto</h2>
+        <form id="formProduto">
+          <input type="hidden" id="produtoId" />
+          <input type="text" id="nomeProduto" placeholder="Nome do produto" required />
+          <input type="number" id="precoProduto" placeholder="Preço" step="0.01" />
+          <select id="categoriaProduto" required>
+  <option value="">Selecione a categoria</option>
+  <option value="Salgados">Salgados</option>
+  <option value="Lanches">Lanches</option>
+  <option value="Pizzas">Pizzas</option>
+  <option value="Tapioca">Tapioca</option>
+  <option value="Bebidas">Bebidas</option>
+  <option value="Sucos">Sucos</option>
+</select>
+
+          <textarea id="descricaoProduto" placeholder="Descrição do produto" required></textarea>
+          <input type="file" id="imagemProduto" accept="image/*" />
+          <img id="preview" style="width: 100px; display: block; margin: 10px 0;" />
+          <button type="submit">Salvar Produto</button>
+          <button type="button" id="cancelarEdicao" style="display:none;">Cancelar</button>
+        </form>
+      </div>
+
+      <!-- 📦 Produtos -->
+      <div id="secao-produtos" class="secao hidden">
+        <div class="card">
+         <input type="text" id="buscaProduto" placeholder="Buscar por nome ou categoria...">
+        </div>
+
+        <h2>Produtos</h2>
+        <div id="listaProdutos"></div>
+      </div>
+
+      <!-- 🛒 Pedidos -->
+      <div id="secao-pedidos" class="secao hidden">
+        <h2>Pedidos</h2>
+        <div id="listaPedidos"></div>
+      </div>
+
+      <!-- ✅ Finalizados -->
+      <div id="secao-finalizados" class="secao hidden">
+        <h2>Pedidos Finalizados</h2>
+        <div id="listaFinalizados"></div>
+      </div>
+
+    </div>
+  </div>
+  </main>
+
+
+
+  <!-- 📜 Scripts -->
+  <script src="script.js"></script>
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
+

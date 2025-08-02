@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "cliente": "Gabriel Lemos Barbosa",
+    "whatsapp": "+5563991300213",
+    "endereco": "Rua Bela Vista, 1051, casa de muro azul e portão vermelho",
+    "latitude": null,
+    "longitude": null,
+    "linkGoogleMaps": "",
+    "precisaLigar": false,
+    "observacoes": "",
+    "itens": [
+      {
+        "id": "2",
+        "nome": "X-Burger",
+        "descricao": "",
+        "imagem": "",
+        "preco": 10,
+        "quantidade": 1
+      }
+    ],
+    "taxaEntrega": 5,
+    "total": 15,
+    "status": "Entregue"
+  },
+  {
+    "id": 2,
+    "cliente": "Ana maria nunes da silva reis",
+    "whatsapp": "63992658670",
+    "endereco": "Rua Machado de Assis 823",
+    "latitude": null,
+    "longitude": null,
+    "linkGoogleMaps": "",
+    "precisaLigar": false,
+    "observacoes": "",
+    "itens": [
+      {
+        "id": "2",
+        "nome": "X-Burger",
+        "descricao": "",
+        "imagem": "",
+        "preco": 10,
+        "quantidade": 1
+      }
+    ],
+    "taxaEntrega": 5,
+    "total": 15,
+    "status": "Entregue"
+  },
+  {
+    "id": 3,
+    "cliente": "GABRIEL BARBOSA",
+    "whatsapp": "+5563991300213",
+    "endereco": "Rua Bela Vista 1051",
+    "latitude": null,
+    "longitude": null,
+    "linkGoogleMaps": "",
+    "precisaLigar": false,
+    "observacoes": "",
+    "itens": [
+      {
+        "id": "2",
+        "nome": "X-Burger",
+        "descricao": "",
+        "imagem": "",
+        "preco": 10,
+        "quantidade": 2
+      }
+    ],
+    "taxaEntrega": 5,
+    "total": 25,
+    "status": "Entregue"
+  }
+]

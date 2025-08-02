@@ -1,0 +1,791 @@
+:root {
+  --bg: #f9f9f9;
+  --bg-dark: #121212;
+  --text: #333;
+  --text-dark: #e0e0e0;
+  --primary: #e70606;
+  --danger: #dc3545;
+  --success: #28a745;
+  --border: #ccc;
+  --light-card: #fff;
+  --dark-card: #2c2c2c;
+}
+
+
+/* RESET E BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* HEADER */
+
+header{
+  padding: 20px;;
+}
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e70606; /* cor vibrante para padaria */
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+
+}
+
+.menu-toggle {
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+.logo-container h1 {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#busca {
+  width: 150px;
+  margin: 0 15px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+#busca:focus {
+  box-shadow: 0 0 5px #e70606;
+}
+
+#abrirCarrinho {
+  display: flex !important;;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+#abrirCarrinho:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 70px;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Botão fechar sidebar */
+#closeSidebar {
+  align-self: flex-end;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  color: #333;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+#closeSidebar:hover {
+  background-color: e70606;
+  color: white;
+  border-radius: 4px;
+}
+
+/* Menu de categorias dentro da sidebar */
+.menu-categorias {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-categorias button {
+  background-color: #e70606;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.menu-categorias button:hover {
+  background-color: #e70606;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 1100;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+} 
+
+/* Estilo para categorias visíveis no topo */
+.menu-categorias-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+.menu-categorias-horizontal .categoria-btn {
+  background-color: white;
+  color: #e70606;
+  border: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menu-categorias-horizontal .categoria-btn:hover {
+  background-color: #ffe0b2;
+}
+.logo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--primary);
+  /* centralizar conteúdo interno */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagem dentro da logo */
+.logo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+/* ==============================
+   FOOTER
+============================== */
+.footer {
+  background-color: var(--bg-dark);
+  color: var(--light-card);
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Container flexível */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cada seção do footer */
+.footer-section {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.footer-section h4 {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: var(--primary);
+  position: relative;
+}
+
+.footer-section h4::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: var(--primary);
+  margin-top: 4px;
+  border-radius: 2px;
+}
+
+/* Texto e listas */
+.footer-section p {
+  margin-top: 8px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* Links */
+.footer a {
+  color: var(--light-card);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer a:hover {
+  color: var(--primary);
+}
+
+/* Redes sociais */
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.social-links a {
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+/* Rodapé inferior */
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0 0;
+  font-size: 0.85rem;
+  color: var(--border);
+}
+
+/* ==============================
+   RESPONSIVO
+============================== */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .footer {
+    padding: 30px 15px;
+  }
+}
+
+
+
+/* Esconde no mobile */
+@media (max-width: 769px) {
+  .menu-categorias-horizontal {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+  }
+}
+
+/* Esconde o botão hambúrguer em telas grandes */
+@media (min-width: 770px) {
+  .menu-toggle {
+    display: none;
+  }
+
+}
+
+
+/* DESKTOP - Sidebar escondida */
+@media (min-width: 769px) {
+  .sidebar {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+    #busca {
+    width: 400px;
+  }
+
+   .logo {
+    width: 80px;
+    height: 80px;
+  }
+  .logo-container h1 {
+    font-size: 16px;
+  }
+
+  .menu-categorias button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+#produtosContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 90px; /* Evita sobreposição com header fixo */
+  padding: 1rem;
+}
+
+/* Estilo do card de produto */
+.produto {
+  width: 180px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.produto img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.produto-info {
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.produto-nome {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.produto-preco {
+  color: #ff6f00;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsivo para 776px */
+@media (max-width: 776px) {
+  .produto {
+    width: 140px;
+  }
+
+  .produto img {
+    height: 120px;
+  }
+
+  .produto-nome {
+    font-size: 0.95rem;
+  }
+
+  .produto-preco {
+    font-size: 0.9rem;
+  }
+    .footer-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .footer {
+    padding: 30px 15px;
+  }
+}
+
+/* Responsivo para 484px */
+@media (max-width: 484px) {
+    .logo {
+    width: 60px;
+    height: 60px;
+  }
+  #produtosContainer {
+    justify-content: center;
+  }
+
+  .produto {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .produto img {
+    height: 180px;
+  }
+}
+main {
+  padding: 1rem;
+}
+
+/* PRODUTOS CONTAINER */
+#produtosContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.produto-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.produto-card:hover {
+  transform: scale(1.02);
+}
+.produto-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.produto-card .info {
+  padding: 0.8rem;
+}
+.produto-card .info h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.produto-card .info p {
+  font-size: 0.875rem;
+  color: #666;
+}
+.produto-card .info strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: #e60000;
+}
+
+/* MODAL GERAL */
+.hidden {
+  display: none;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  margin: 5% auto;
+  position: relative;
+}
+#modalCarrinho,
+#modalDetalhe,
+#modalPedido {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+/* MODAL DETALHE */
+#modalDetalhe img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.quantidade-controle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+.quantidade-controle button {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background-color: #e60000;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+#btnAdicionarCarrinho {
+  background-color: #e60000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* MODAL CARRINHO */
+#modalCarrinho textarea {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+#modalCarrinho button {
+  background-color: #e60000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#modalCarrinho button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+/* MODAL PEDIDO */
+#modalPedido input,
+#modalPedido textarea {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+#modalPedido button {
+  background-color: #e60000;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+#modalDetalhe,
+#modalCarrinho,
+#modalPedido {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none; /* Fica oculto inicialmente */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#modalDetalhe.active,
+#modalCarrinho.active,
+#modalPedido.active {
+  display: flex; /* Só mostra quando a classe 'active' é adicionada */
+}
+
+
+/* MAPA */
+#mapa {
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* STATUS / IMAGEM */
+#mensagemStatus {
+  background-color: #4caf50;
+  font-weight: bold;
+}
+#resumoImagem {
+  display: none;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 10% 1rem;
+  }
+  .quantidade-controle button {
+    width: 36px;
+    height: 36px;
+    margin: 0 0.5rem;
+  }
+  #btnAdicionarCarrinho {
+    font-size: 0.95rem;
+  }
+  #modalDetalhe img {
+    max-height: 160px;
+  }
+}
+
+/* MODAIS FLUTUANTES */
+.hidden {
+  display: none;
+}
+#modalDetalhe,
+#modalCarrinho,
+#modalPedido {
+  position: fixed;       /* fica flutuante na tela */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;         /* será mostrado via JS */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#modalDetalhe.active,
+#modalCarrinho.active,
+#modalPedido.active {
+  display: flex;
+}
+.modal-content {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .menu-categorias-horizontal {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  #sidebar,
+  .menu-toggle {
+    display: none;
+  }
+  .menu-categorias-horizontal {
+    display: flex;
+  }
+}
+
+.hidden {
+  display: none;
+}
+#modalCarrinho {
+  display: none;
+}
+
+#modalCarrinho.active {
+  display: block;
+}
+.carrinho-btn {
+  position: relative; /* importante para o badge ser posicionado relativo a ele */
+  font-size: 24px; /* tamanho do ícone */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.carrinho-btn .badge {
+  position: absolute;
+  top: -6px;    /* ajusta para ficar "em cima" do ícone */
+  right: -6px;  /* ajusta para ficar alinhado no canto direito */
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* para clicar só no botão, não na badge */
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
