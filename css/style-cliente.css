@@ -243,21 +243,21 @@ header{
 .footer-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* Cada seção do footer */
 .footer-section {
-  flex: 1 1 200px;
+  flex: 2 1 200px;
   min-width: 180px;
 }
 
 .footer-section h4 {
   margin-bottom: 12px;
   font-size: 1.1rem;
-  color: var(--primary);
+  color: var(--bg);
   position: relative;
 }
 
@@ -274,7 +274,6 @@ header{
 /* Texto e listas */
 .footer-section p {
   margin-top: 8px;
-  line-height: 1.6;
   font-size: 0.95rem;
 }
 
@@ -312,10 +311,10 @@ header{
 
 /* Rodapé inferior */
 .footer-bottom {
-  text-align: center;
-  padding: 15px 0 0;
+  padding: 15px;
   font-size: 0.85rem;
   color: var(--border);
+  margin: 0 auto;
 }
 
 /* ==============================
@@ -324,11 +323,21 @@ header{
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
-    gap: 30px;
   }
   .footer {
-    padding: 30px 15px;
+    padding: 15px;
   }
+  .footer-section {
+  flex: 1 100px;
+  min-width: 180px;
+}
+.footer-bottom {
+  padding: 15px;
+  font-size: 0.85rem;
+  color: var(--border);
+  margin: 0 auto;
+}
+
 }
 
 
@@ -401,12 +410,14 @@ header{
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease;
+  box-shadow: calc(0.5rem) 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
 }
 
 .produto:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(2, 111, 236, 0.15);
 }
 
 .produto img {
@@ -439,6 +450,10 @@ header{
   .produto {
     width: 140px;
   }
+  .produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(1, 26, 188, 0.879);
+}
 
   .produto img {
     height: 120px;
@@ -453,10 +468,9 @@ header{
   }
     .footer-container {
     flex-direction: column;
-    gap: 30px;
   }
   .footer {
-    padding: 30px 15px;
+    padding: 15px;
   }
 }
 
@@ -473,11 +487,17 @@ header{
   .produto {
     width: 100%;
     max-width: 340px;
+    border: 0.5px solid #d5d5d5;
   }
 
   .produto img {
     height: 180px;
   }
+  .produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(2, 111, 236, 0.15);
+  border: 1px solid #063be7;
+}
 }
 main {
   padding: 1rem;
@@ -750,6 +770,9 @@ main {
   }
   .menu-categorias-horizontal {
     display: flex;
+  }
+  #busca {
+    width: 400px;
   }
 }
 
