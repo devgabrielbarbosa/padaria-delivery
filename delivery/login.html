@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login / Cadastro Cliente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
+      padding: 30px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .form-card {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .password-container input {
+      padding-right: 40px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+      color: #666;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #df0404;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #cf0404;
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 20px;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .toggle-link:hover {
+      text-decoration: underline;
+    }
+
+    .error, .success {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .error { color: red; }
+    .success { color: green; }
+
+    .back {
+      transform: rotateY(180deg);
+    }
+
+    .flip .card {
+      transform: rotateY(180deg);
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      margin-top: 8px;
+      color: #555;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+     @media (max-width: 480px) {
+      .form-card {
+        padding: 20px;
+      }
+
+      button {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="card" id="card">
+
+      <!-- Login -->
+      <div class="form-card front">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <label for="emailLogin">Email:</label>
+          <input type="email" id="emailLogin" required />
+
+          <label for="senhaLogin">Senha:</label>
+          <div class="password-container">
+            <input type="password" id="senhaLogin" required />
+            <span class="toggle-password" onclick="toggleSenha('senhaLogin', this)">👁️</span>
+          </div>
+
+          <div class="forgot-link" onclick="redefinirSenha()">Esqueceu a senha?</div>
+
+          <button type="submit">Entrar</button>
+          <p class="toggle-link" onclick="flipCard()">Ainda não tem conta? Cadastre-se</p>
+          <p class="error" id="loginErro"></p>
+        </form>
+      </div>
+
+      <!-- Cadastro -->
+      <div class="form-card back">
+        <h2>Cadastro</h2>
+        <form id="cadastroForm">
+          <label for="emailCadastro">Email:</label>
+          <input type="email" id="emailCadastro" required />
+
+          <label for="senhaCadastro">Senha:</label>
+          <div class="password-container">
+            <input type="password" id="senhaCadastro" required />
+            <span class="toggle-password" onclick="toggleSenha('senhaCadastro', this)">👁️</span>
+          </div>
+
+          <button type="submit">Cadastrar</button>
+          <p class="toggle-link" onclick="flipCard()">Já tem conta? Fazer login</p>
+          <p class="error" id="cadastroErro"></p>
+          <p class="success" id="cadastroSucesso"></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyY14CV-ODcWMSD4tdGkGzh0HlZr_8KvY",
+      authDomain: "lanchonete-lj.firebaseapp.com",
+      projectId: "lanchonete-lj",
+      storageBucket: "lanchonete-lj.appspot.com",
+      messagingSenderId: "939172982803",
+      appId: "1:939172982803:web:9695ada6d98d4fed858fe6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const container = document.getElementById('container');
+    const card = document.getElementById('card');
+
+    window.flipCard = () => {
+      container.classList.toggle('flip');
+    }
+
+    // Mostrar/Ocultar senha
+    window.toggleSenha = (inputId, icon) => {
+      const input = document.getElementById(inputId);
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      icon.textContent = isPassword ? '🙈' : '👁️';
+    };
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('emailLogin').value.trim();
+      const senha = document.getElementById('senhaLogin').value.trim();
+      const erro = document.getElementById('loginErro');
+      erro.textContent = '';
+
+      if (!email || !senha) {
+        erro.textContent = "Preencha o email e a senha.";
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, senha);
+        window.location.href = './index.html'; // redirecionar para página principal
+      } catch (err) {
+        erro.textContent = "Erro ao fazer login: " + err.message;
+      }
+    });
+
+    // Cadastro
+    document.getElementById('cadastroForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('emailCadastro').value.trim();
+      const senha = document.getElementById('senhaCadastro').value.trim();
+      const erro = document.getElementById('cadastroErro');
+      const sucesso = document.getElementById('cadastroSucesso');
+      erro.textContent = '';
+      sucesso.textContent = '';
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, senha);
+        sucesso.textContent = "Cadastro realizado com sucesso!";
+        setTimeout(() => {
+          flipCard();
+        }, 1500);
+      } catch (err) {
+        erro.textContent = "Erro ao cadastrar: " + err.message;
+      }
+    });
+
+    // Redefinir senha
+    window.redefinirSenha = async () => {
+      const email = prompt("Digite seu email para redefinir a senha:");
+      if (email) {
+        try {
+          await sendPasswordResetEmail(auth, email);
+          alert("Email de redefinição enviado!");
+        } catch (err) {
+          alert("Erro: " + err.message);
+        }
+      }
+    };
+  </script>
+</body>
+</html>

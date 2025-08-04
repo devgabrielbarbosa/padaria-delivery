@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel Administrativo - Lanches da LJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style-admin.css" />
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-n..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+  <!-- 🔝 Header Superior -->
+  <header  class="hidden">
+    <div class="logo-container">
+      <a href="#"><img class="logo" src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png" alt="Logo" /></a>
+      <span class="admin-user"><i class="fa fa-user-circle"></i> Olá, administrador!</span>
+      <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 📚 Menu Lateral -->
+    <div class="sidebar hidden">
+      <h2>Painel</h2>
+      <button onclick="mostrarSecao('cadastro')"><i class="fa fa-plus-circle"></i> Cadastrar Produto</button>
+      <button onclick="mostrarSecao('produtos')"><i class="fa fa-box"></i> Produtos</button>
+      <button onclick="mostrarSecao('pedidos')"><i class="fa fa-receipt"></i> Pedidos</button>
+      <button onclick="mostrarSecao('finalizados')"><i class="fa fa-check-circle"></i> Finalizados</button>
+      <button onclick="alternarTema()"><i class="fa fa-moon"></i> Modo Escuro</button>
+      <button onclick="logout()"><i class="fa fa-sign-out-alt"></i> Sair</button>
+    </div>
+
+    <!-- 🔧 Conteúdo Principal -->
+    <div class="main">
+
+      <!-- 🔐 Tela de Login -->
+      <div id="telaLogin" class="card">
+        <h2><i class="fa fa-lock"></i> Login</h2>
+        <input type="password" id="senha" placeholder="Digite a senha" />
+        <button class="primary" onclick="verificarLogin()"><i class="fa fa-sign-in-alt"></i> Entrar</button>
+        <p id="mensagemLogin" style="color: red;"></p>
+      </div>
+
+      <!-- 📊 Painel Principal -->
+      <div id="painel" class="card hidden">
+
+        <!-- 📥 Cadastro -->
+        <div id="secao-cadastro" class="secao">
+          <h2><i class="fa fa-plus"></i> Cadastrar Produto</h2>
+          <form id="formProduto">
+            <input type="hidden" id="produtoId" />
+            <input type="text" id="nomeProduto" placeholder="Nome do produto" required />
+            <input type="number" id="precoProduto" placeholder="Preço" step="0.01" />
+            <select id="categoriaProduto" required>
+              <option value="">Selecione a categoria</option>
+              <option value="Salgados">Salgados</option>
+              <option value="Lanches">Lanches</option>
+              <option value="Pizzas">Pizzas</option>
+              <option value="Tapioca">Tapioca</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Sucos">Sucos</option>
+            </select>
+            <textarea id="descricaoProduto" placeholder="Descrição do produto" required></textarea>
+            <input type="file" id="imagemProduto" accept="image/*" />
+            <img id="preview" style="width: 100px; display: block; margin: 10px 0;" />
+            <button type="submit"><i class="fa fa-save"></i> Salvar Produto</button>
+            <button type="button" id="cancelarEdicao" style="display:none;"><i class="fa fa-times"></i> Cancelar</button>
+          </form>
+        </div>
+
+        <!-- 📦 Produtos -->
+        <div id="secao-produtos" class="secao hidden">
+          <div class="card">
+            <input type="text" id="buscaProduto" placeholder="Buscar por nome ou categoria...">
+          </div>
+          <h2><i class="fa fa-box-open"></i> Produtos</h2>
+          <div id="listaProdutos">Carregando produtos...</div>
+        </div>
+
+        <!-- 🛒 Pedidos -->
+        <div id="secao-pedidos" class="secao hidden">
+          <h2><i class="fa fa-shopping-cart"></i> Pedidos</h2>
+          <div id="listaPedidos">Carregando pedidos...</div>
+        </div>
+
+        <!-- ✅ Finalizados -->
+        <div id="secao-finalizados" class="secao hidden">
+          <h2><i class="fa fa-clipboard-check"></i> Pedidos Finalizados</h2>
+          <div id="listaFinalizados"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 🔥 Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- 🧠 Script principal -->
+  <script type="module" src="../js/script-admin.js"></script>
+
+  <!-- ☰ Menu lateral -->
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
+
