@@ -1,325 +1,1040 @@
+
 /* ==============================
-   VARIÁVEIS
+VARIÁVEIS
 ============================== */
 :root {
-  --bg: #f9f9f9;
-  --bg-dark: #121212;
-  --text: #333;
-  --text-dark: #e0e0e0;
-  --primary: #e70606;
-  --danger: #dc3545;
-  --success: #28a745;
-  --border: #ccc;
-  --light-card: #fff;
-  --dark-card: #2c2c2c;
+--bg: #f9f9f9;
+--bg-dark: #121212;
+--text: #333;
+--text-dark: #e0e0e0;
+--primary: #e70606;
+--danger: #dc3545;
+--success: #28a745;
+--border: #ccc;
+--light-card: #fff;
+--dark-card: #2c2c2c;
 }
 
 /* ==============================
-   RESET
+RESET
 ============================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
+*{ margin: 0; 
+  padding: 0;
+   box-sizing: border-box; 
+  
+}
 /* ==============================
-   BODY
+BODY
 ============================== */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  transition: 0.3s ease;
-  display: flex;
-  flex-direction: column;
+font-family: 'Segoe UI', sans-serif;
+background-color: var(--bg);
+color: var(--text);
+transition: 0.3s ease;
+display: flex;
+flex-direction: column;
 }
 
 body.dark {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
+background-color: var(--bg-dark);
+color: var(--text-dark);
 }
 
 /* ==============================
-   HEADER
+HEADER
 ============================== */
 header {
-  background: var(--primary);
-  color: white;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-  z-index: 999;
-  position: relative;
+background: var(--primary);
+color: white;
+padding: 20px;
+text-align: center;
+width: 100%;
+z-index: 999;
+position: relative;
+}
+
+h2, h3 {
+color: #444;
+}
+form > div {
+margin-bottom: 2rem;
+padding: 1rem;
+border: 1px solid #ccc;
+border-radius: 10px;
+background-color: #f9f9f9;
+}
+label {
+display: block;
+margin: 0.5rem 0;
+}
+button {
+padding: 10px 20px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+}
+button:hover {
+background-color: #0056b3;
 }
 .hidden {
-  display: none !important;
+display: none !important;
 }
 
 .logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  justify-content: end;
-  align-items: center;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0 auto;
+justify-content: end;
+align-items: center;
 }
 /* ==============================
-   MENU HAMBÚRGUER
+MENU HAMBÚRGUER
 ============================== */
 .hamburger-btn {
-  display: none;
-  background: var(--primary);
-  color: white;
-  font-size: 24px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  padding: 10px ;
-  top: 20px;
-  left: 20px;
-  z-index: 1001;
+display: none;
+background: var(--primary);
+color: white;
+font-size: 24px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+padding: 10px ;
+top: 20px;
+left: 20px;
+z-index: 1001;
 }
 .logo {
-  display: block;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: var(--primary);
-  /* centralizar conteúdo interno */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+display: block;
+width: 120px;
+height: 120px;
+border-radius: 50%;
+overflow: hidden;
+background-color: var(--primary);
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 /* Imagem dentro da logo */
 .logo img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+width: 100%;
+height: auto;
+object-fit: cover;
 }
 
 /* ==============================
-   SIDEBAR
+SIDEBAR
 ============================== */
 .sidebar {
-  width: 200px;
-  background: var(--primary);
-  min-height: 100vh;
-  color: white;
-  padding: 20px;
-  position: fixed;
-  top: 0px;
-  left: 0;
-  transition: left 0.3s ease;
-  z-index: 1000;
+width: 200px;
+background: var(--primary);
+min-height: 100vh;
+color: white;
+padding: 20px;
+position: fixed;
+top: 0px;
+left: 0;
+transition: left 0.3s ease;
+z-index: 1000;
 }
 
 .sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
+font-size: 20px;
+margin-bottom: 20px;
 }
 
 .sidebar button {
-  display: block;
-  background: none;
-  border: none;
-  color: white;
-  text-align: left;
-  margin-bottom: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+display: block;
+background: none;
+border: none;
+color: white;
+text-align: left;
+margin-bottom: 10px;
+font-size: 16px;
+cursor: pointer;
+padding: 10px;
+width: 100%;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+font-weight: bold;
+text-transform: uppercase;
+letter-spacing: 1px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==============================
-   MAIN
+MAIN
 ============================== */
 .main {
-  margin-left: 250px;
-  padding: 20px;
-  width: calc(100% - 250px);
+margin-left: 250px;
+padding: 20px;
+width: calc(100% - 250px);
 }
 
 /* ==============================
-   COMPONENTES / CARDS
+COMPONENTES / CARDS
 ============================== */
 .card {
-  background: var(--light-card);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 30px;
+background: var(--light-card);
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+margin-bottom: 30px;
 }
 
 body.dark .card {
-  background: var(--dark-card);
+background: var(--dark-card);
 }
 
 input,
 button,
 select,
 textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  font-size: 16px;
+width: 100%;
+padding: 10px;
+margin: 8px 0;
+border-radius: 6px;
+border: 1px solid var(--border);
+font-size: 16px;
 }
 
 button.primary {
-  background: var(--primary);
-  color: white;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
+background: var(--primary);
+color: white;
+font-weight: bold;
+border: none;
+cursor: pointer;
 }
 
 button.primary:hover {
-  background-color: #d85e00;
+background-color: #d85e00;
 }
 
 button.danger {
-  background-color: var(--danger);
+background-color: var(--danger);
 }
 
 button.success {
-  background-color: var(--success);
+background-color: var(--success);
+}
+
+/*
+produtos
+*/
+.cards-container {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 20px;
+padding: 10px 0;
+}
+
+.card-produto {
+background: #fff;
+border-radius: 8px;
+box-shadow: 0 3px 8px rgb(0 0 0 / 0.15);
+padding: 15px;
+display: flex;
+flex-direction: column;
+align-items: center;
+transition: transform 0.2s ease;
+}
+
+.card-produto:hover {
+transform: translateY(-5px);
+}
+
+.img-produto {
+width: 100%;
+max-width: 250px;
+height: 180px;
+object-fit: cover;
+border-radius: 6px;
+margin-bottom: 10px;
+}
+
+.card-produto h3 {
+margin: 5px 0 10px 0;
+text-align: center;
+}
+
+.card-produto p {
+margin: 3px 0;
+text-align: center;
+}
+
+.descricao {
+font-size: 0.9rem;
+color: #555;
+height: 60px;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.status {
+font-weight: 700;
+margin-top: 8px;
+}
+
+.status.ativo {
+color: green;
+}
+
+.status.inativo {
+color: red;
+}
+
+.botoes-acoes {
+margin-top: auto;
+display: flex;
+justify-content: center;
+gap: 8px;
+flex-wrap: wrap;
+}
+
+.btn {
+padding: 6px 12px;
+border: none;
+border-radius: 4px;
+font-weight: 600;
+cursor: pointer;
+color: white;
+transition: background-color 0.3s ease;
+}
+
+.btn.editar {
+background-color: #007bff;
+}
+
+.btn.editar:hover {
+background-color: #0056b3;
+}
+
+.btn.toggle {
+background-color: #28a745;
+}
+
+.btn.toggle:hover {
+background-color: #19692c;
+}
+
+.btn.excluir {
+background-color: #dc3545;
+}
+
+.btn.excluir:hover {
+background-color: #7a1c24;
+}
+
+/* Responsividade extra */
+@media (max-width: 400px) {
+.card-produto {
+padding: 10px;
+}
+.img-produto {
+height: 140px;
+}
+.descricao {
+height: auto;
+}
+}
+
+.modal {
+display: none;
+position: fixed;
+z-index: 10000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow-y: auto;
+background-color: rgba(0, 0, 0, 0.5);
+padding: 40px 10px;
+box-sizing: border-box;
+}
+
+/* Conteúdo do modal (caixa branca) */
+.modal-content {
+background-color: #fff;
+margin: auto;
+padding: 25px 30px;
+border-radius: 10px;
+max-width: 480px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+position: relative;
+font-family: Arial, sans-serif;
+}
+
+/* Botão fechar no canto superior direito */
+.close {
+position: absolute;
+right: 20px;
+top: 15px;
+font-size: 28px;
+font-weight: bold;
+color: #666;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+.close:hover {
+color: #000;
+}
+
+/* Estilização do formulário */
+form#formEditarProduto {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+/* Labels do formulário */
+form#formEditarProduto label {
+font-weight: 600;
+margin-bottom: 5px;
+color: #333;
+}
+
+/* Inputs e textarea */
+form#formEditarProduto input[type="text"],
+form#formEditarProduto input[type="number"],
+form#formEditarProduto select,
+form#formEditarProduto textarea {
+padding: 8px 12px;
+border-radius: 5px;
+border: 1px solid #ccc;
+font-size: 15px;
+font-family: inherit;
+resize: vertical;
+transition: border-color 0.3s ease;
+}
+
+form#formEditarProduto input[type="text"]:focus,
+form#formEditarProduto input[type="number"]:focus,
+form#formEditarProduto select:focus,
+form#formEditarProduto textarea:focus {
+border-color: #007bff;
+outline: none;
+}
+
+/* Botão submit */
+form#formEditarProduto button[type="submit"] {
+background-color: #007bff;
+color: white;
+padding: 12px;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+font-weight: 700;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+form#formEditarProduto button[type="submit"]:hover {
+background-color: #0056b3;
+}
+
+/* Responsividade */
+@media (max-width: 520px) {
+.modal-content {
+width: 95%;
+padding: 20px;
+}
 }
 
 /* ==============================
-   PRODUTOS / PEDIDOS
+PRODUTOS / PEDIDOS
 ============================== */
 .produto-card,
 .pedido-card {
-  display: flex;
-  gap: 15px;
-  background: #f0f0f0;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px 0;
-  align-items: center;
+display: flex;
+gap: 15px;
+background: #f0f0f0;
+border-radius: 10px;
+padding: 10px;
+margin: 10px 0;
+align-items: center;
 }
 
 body.dark .produto-card,
 body.dark .pedido-card {
-  background: #333;
+background: #333;
 }
 
 .produto-img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
+width: 80px;
+height: 80px;
+object-fit: cover;
+border-radius: 8px;
 }
 
 .acoes button {
-  margin-top: 5px;
-  width: auto;
-  padding: 5px 10px;
-  font-size: 14px;
+margin-top: 5px;
+width: auto;
+padding: 5px 10px;
+font-size: 14px;
 }
 
 /* ==============================
-   UTILITÁRIOS
+UTILITÁRIOS
 ============================== */
 .hidden {
-  display: none;
+display: none;
+}
+
+.tabela-produtos {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+font-family: Arial, sans-serif;
+}
+
+.tabela-produtos th,
+.tabela-produtos td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: center;
+vertical-align: middle;
+}
+
+.tabela-produtos th {
+background-color: #333;
+color: white;
+}
+
+.img-produto {
+width: 80px;
+height: 80px;
+object-fit: cover;
+border-radius: 6px;
+}
+
+.btn {
+margin: 2px;
+padding: 6px 12px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+color: white;
+font-weight: 600;
+transition: background-color 0.3s;
+}
+
+.btn.editar {
+background-color: #007bff;
+}
+
+.btn.editar:hover {
+background-color: #0056b3;
+}
+
+.btn.toggle {
+background-color: #28a745;
+}
+
+.btn.toggle:hover {
+background-color: #19692c;
+}
+
+.btn.excluir {
+background-color: #dc3545;
+}
+
+.btn.excluir:hover {
+background-color: #7a1c24;
+}
+
+/* Container de pedidos */
+#pedidosContainer {
+padding: 10px;
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+justify-content: flex-start;
+}
+
+.pedido-card {
+background-color: #f9f9f9;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 15px;
+width: 280px;  /* largura fixa para formar cards */
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+font-family: Arial, sans-serif;
+color: #333;
+}
+
+.pedido-card h3 {
+margin-top: 0;
+font-size: 1.2rem;
+}
+
+.pedido-card ul {
+padding-left: 20px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.pedido-card button {
+margin-right: 8px;
+padding: 6px 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+background-color: #007bff;
+color: white;
+transition: background-color 0.3s ease;
+}
+
+.pedido-card button:hover {
+background-color: #0056b3;
+}
+#modalDetalhes {
+display: none;
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background: rgba(0, 0, 0, 0.6);
+z-index: 9999;
+
+/* Centralizar conteúdo */
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+#modalDetalhes > div {
+background: #fff;
+max-width: 500px;
+width: 100%;
+border-radius: 10px;
+padding: 30px 25px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+position: relative;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: #333;
+}
+
+#modalDetalhes button[onclick="fecharModalDetalhes()"] {
+position: absolute;
+top: 15px;
+right: 15px;
+background: transparent;
+border: none;
+font-size: 24px;
+cursor: pointer;
+color: #666;
+transition: color 0.3s ease;
+}
+
+#modalDetalhes button[onclick="fecharModalDetalhes()"]:hover {
+color: #000;
+}
+
+#modalDetalhes h2 {
+margin-top: 0;
+margin-bottom: 20px;
+font-weight: 700;
+font-size: 28px;
+color: #222;
+text-align: center;
+}
+
+#modalDetalhes p,
+#modalDetalhes label,
+#modalDetalhes h3 {
+margin-bottom: 12px;
+font-size: 16px;
+}
+
+#modalDetalhes p strong,
+#modalDetalhes label strong {
+color: #555;
+}
+
+.itensPedido {
+list-style-type: none;
+padding-left: 0;
+margin-bottom: 20px;
+max-height: 180px;
+overflow-y: auto;
+border: 1px solid #ddd;
+border-radius: 6px;
+padding: 10px 15px;
+background: #fafafa;
+}
+
+.itensPedido li {
+padding: 6px 0;
+border-bottom: 1px solid #eee;
+}
+
+.itensPedido li:last-child {
+border-bottom: none;
+}
+
+.observacoesPedido span {
+font-style: italic;
+color: #666;
+}
+
+.totalPedido {
+font-weight: 700;
+font-size: 20px;
+text-align: right;
+margin-bottom: 20px;
+color: #111;
+}
+
+#selectStatusPedido {
+width: 100%;
+padding: 8px 10px;
+font-size: 16px;
+border-radius: 6px;
+border: 1px solid #ccc;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+#selectStatusPedido:focus {
+border-color: #007bff;
+box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* cores só como exemplo, você pode ajustar /
+/ =========================
+Estilo base (desktop)
+========================= */
+#listaPedidos{
+  background-color: rgba(248, 248, 248, 0.933);
+}
+.pedido {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-start;
+gap: 16px;
+border: 1px solid #6394ea;
+border-radius: 10px;
+padding: 4px;
+box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+margin: 10px;
+}
+
+/* Conteúdo textual (lado esquerdo) */
+.pedido .conteudo {
+flex: 1 1 auto;
+min-width: 0;
+}
+
+.pedido .conteudo p {
+margin: 4px 0;
+color: #374151;
+}
+
+.pedido .conteudo strong {
+display: inline-block;
+font-size: 1rem;
+color: #111827;
+margin-right: 8px;
+}
+
+/* Subtexto */
+.pedido .conteudo .sub {
+color: #6b7280;
+font-style: italic;
+font-weight: 500;
+margin-left: 6px;
+}
+
+/* Badge de status */
+.status-label {
+display: inline-block;
+padding: 6px 12px;
+font-weight: 600;
+font-size: 0.85rem;
+color: #fff;
+margin-left: 8px;
+text-transform: capitalize;
+vertical-align: middle;
+margin: 10px;
+}
+
+.status-pendente {
+   background: #f59e0b;
+   }      
+.status-em-preparo {
+ 
+  background: #0ea5e9; 
+} 
+.status-saiu-para-entrega {
+   color: white; 
+   background: #0802a2; 
+  } 
+.status-entregue { 
+  background: #16a34a;
+ }      
+.status-cancelado{ 
+  background: #dc2626;
+ }      
+
+ Total */
+.pedido .total {
+color: #111827;
+font-weight: 700;
+margin-top: 6px;
+}
+
+/* Área de ações (botões) à direita no desktop */
+.pedido .acoes {
+display: flex;
+flex-direction: column;
+gap: 10px;
+align-items: flex-end;
+min-width: 180px;
+}
+
+/* Botões (base) */
+button.ver-detalhes,
+button.whatsapp {
+width: 160px;
+padding: 9px 14px;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+font-weight: 700;
+box-shadow: 0 6px 16px rgba(2,6,23,0.06);
+transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+font-size: 0.95rem;
+display: inline-flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Estilos específicos dos botões */
+button.ver-detalhes {
+background: linear-gradient(180deg,#0b74ff,#0066d6);
+color: #fff;
+}
+
+button.ver-detalhes:hover { transform: translateY(-2px); }
+
+button.whatsapp {
+background: linear-gradient(180deg,#25d366,#1da851);
+color: #fff;
+}
+
+button.whatsapp:hover { transform: translateY(-2px); }
+
+/* Pequena diferença visual quando desabilitado */
+button[disabled] {
+opacity: 0.55;
+cursor: not-allowed;
+transform: none;
+}
+
+
+/* =========================
+Responsividade (mobile)
+========================= */
+
+/* Meta: telas pequenas e tablets */
+@media (max-width: 880px) {
+.pedido {
+flex-direction: column;
+align-items: stretch;
+padding: 12px;
+gap: 12px;
+}
+
+.pedido .acoes {
+flex-direction: column;
+align-items: stretch;
+min-width: 0;
+margin-top: 6px;
+}
+
+/* Botões agora ocupam a largura total do card (toque fácil) */
+button.ver-detalhes,
+button.whatsapp {
+width: 100%;
+padding: 12px 16px;
+border-radius: 8px;
+font-size: 1rem;
+}
+
+/* Botões lado a lado quando houver espaço (opcional) */
+.acoes.row {
+display: flex;
+flex-direction: row;
+gap: 8px;
+}
+
+/* Ajuste de texto para caber melhor */
+.pedido .conteudo strong {
+font-size: 0.98rem;
+}
+
+.status-label {
+font-size: 0.82rem;
+padding: 5px 10px;
+}
+}
+.notificacao-pedido {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background-color: #2e86de;
+color: white;
+padding: 15px 25px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+font-weight: bold;
+font-family: Arial, sans-serif;
+cursor: default;
+display: flex;
+align-items: center;
+justify-content: space-between;
+min-width: 220px;
+z-index: 9999;
+animation: slideIn 0.3s ease forwards;
+}
+
+.btn-fechar {
+background: transparent;
+border: none;
+color: white;
+font-size: 18px;
+cursor: pointer;
+margin-left: 15px;
+}
+
+@keyframes slideIn {
+from { opacity: 0; transform: translateX(100%); }
+to { opacity: 1; transform: translateX(0); }
+}
+
+/* Ajustes finos para telas muito pequenas */
+@media (max-width: 420px) {
+.pedido {
+padding: 10px;
+}
+.pedido .conteudo strong {
+font-size: 0.95rem;
+}
+.pedido .total {
+font-size: 0.95rem;
+}
+button.ver-detalhes,
+button.whatsapp {
+font-size: 0.98rem;
+padding: 12px;
+}
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #modalImprimir, #modalImprimir * {
+    visibility: visible;
+  }
+  #modalImprimir {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  #btnFecharModalImprimir, #btnImprimir {
+    display: none;
+  }
 }
 
 /* ==============================
-   RESPONSIVO - MOBILE
+RESPONSIVO - MOBILE
 ============================== */
 @media (max-width: 768px) {
 
-  header {
-    padding: 10px;
-    font-size: 16px;
-    text-align: center;
-    position: relative;
-    background-color: var(--primary);
-  }
+header {
+padding: 10px;
+font-size: 16px;
+text-align: center;
+position: relative;
+background-color: var(--primary);
+}
 
+.logo-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 500px;
+margin: 0 auto;
+padding: 10px 20px;
+}
+.hamburger-btn {
+display: block;
+}
+.logo {
+width: 80px;
+height: 80px;
+}
 
-  .logo-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-     max-width: 500px;
-    margin: 0 auto;
-    padding: 10px 20px;
-  }
-  .hamburger-btn {
-    display: block;
-  }
-    .logo {
-    width: 80px;
-    height: 80px;
-  }
+main{
+padding: 0 20px;
+}
 
+.sidebar {
+left: -260px;
+width: 250px;
+height: 100%;
+top: 100px;
+padding-top: 40px;
+}
 
-  main{
-    padding: 0 20px;
-  }
+.sidebar.active {
+left: 0;
+}
 
-  .sidebar {
-    left: -260px;
-    width: 250px;
-    height: 100%;
-    top: 100px;
-    padding-top: 40px;
-  }
+.main {
+margin-left: 0;
+padding: 10px;
+width: 100%;
 
-  .sidebar.active {
-    left: 0;
-  }
+}
 
-  .main {
-    margin-left: 0;
-    padding: 10px;
-    width: 100%;
+.produto-card,
+.pedido-card {
+flex-direction: column;
+align-items: flex-start;
+}
 
-  }
+.produto-img {
+width: 100%;
+height: auto;
+}
 
-  .produto-card,
-  .pedido-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+input,
+button,
+select,
+textarea {
+font-size: 16px;
+}
 
-  .produto-img {
-    width: 100%;
-    height: auto;
-  }
+header {
+padding: 15px;
+font-size: 18px;
+}
 
-  input,
-  button,
-  select,
-  textarea {
-    font-size: 16px;
-  }
-
-  header {
-    padding: 15px;
-    font-size: 18px;
-  }
-
-  .sidebar button {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
+.sidebar button {
+display: block;
+width: 100%;
+text-align: left;
+}
 }

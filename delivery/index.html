@@ -8,132 +8,121 @@
   <!-- Leaflet CSS (se usar mapa) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<header class="top-header">
-  <div class="logo-container">
-    <a href=""><img class="logo" src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png " alt="Logo Padaria Delivery"></a>
+<header>
+  <div  class="top-header">
+    <div class="logo-container">
+      <a href=""><img class="logo" src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png " alt="Logo Padaria Delivery"></a>
+    </div>
+
+    <!-- SIDEBAR (mostrada só no mobile) -->
+    <div class="sidebar" id="sidebar">
+      <button id="closeSidebar">×</button>
+      <div class="menu-categorias" id="filtro-categoria">
+        <button class="categoria-btn" id="btn-filtrar" data-categoria="todos" value="todos">Todos</button>
+        <button class="categoria-btn produtos" data-categoria="salgado" value="salgado">Salgados</button>
+        <button class="categoria-btn produtos" data-categoria="hamburguer" value="hamburger">Hambúrguer</button>
+        <button class="categoria-btn produtos" data-categoria="pizza" value="pizza">Pizzas</button>
+        <button class="categoria-btn produtos" data-categoria="tapioca" value="tapioca">Tapioca</button>
+        <button class="categoria-btn produtos" data-categoria="bebida" value="bebida">Bebidas</button>
+        <button class="categoria-btn produtos" data-categoria="refrigerante" value="refrigerante">Refrigerantes</button>
+        <button class="categoria-btn produtos" data-categoria="suco" value="suco">Sucos</button>
+         <button class="categoria-btn produtos" data-categoria="cafe" value="cafe">Café</button>
+      </div>
+    </div>
+
+    <div class="busca-container">
+      <input type="text" id="busca" placeholder="Buscar produto..." />
+      <button id="btnBuscar" class="lupa-btn">
+        🔍
+      </button>
+    </div>
+
+    <button id="abrirCarrinho" class="carrinho-btn" title="Abrir carrinho de compras">
+      🛒
+      <span class="badge">0</span>
+    </button>
+
+    <button class="menu-toggle" id="abrirSidebar" title="Menu de Categorias">☰</button>
+    <!-- Modal de loja fechada -->
+    <div id="modalFechado" class="modal"></div>
   </div>
-
-<nav class="menu-categorias-horizontal">
-  <button class="categoria-btn" data-categoria="todos">Todos</button>
-  <button class="categoria-btn" data-categoria="Salgados">Salgados</button>
-  <button class="categoria-btn" data-categoria="Lanches">Lanches</button>
-  <button class="categoria-btn" data-categoria="Pizzas">Pizzas</button>
-  <button class="categoria-btn" data-categoria="Tapioca">Tapioca</button>
-  <button class="categoria-btn" data-categoria="Bebidas">Bebidas</button>
-  <button class="categoria-btn" data-categoria="Sucos">Sucos</button>
-</nav>
-
-
-  <input type="text" id="busca" placeholder="Buscar produto..." />
-<button id="abrirCarrinho" class="carrinho-btn" title="Abrir carrinho de compras">
-  🛒
-  <span class="badge">0</span>
-</button>
-
-  <button class="menu-toggle" id="abrirSidebar" title="Menu de Categorias">☰</button>
+  <p id="mensagemHorario"></p>
 </header>
 
-<!-- Sidebar lateral (usado apenas no mobile) -->
-<aside class="sidebar" id="sidebar">
-  <button id="closeSidebar">&times;</button>
-  <div class="menu-categorias">
-    <!-- Repetimos os mesmos botões dentro da sidebar -->
-    <button class="categoria-btn">Todos</button>
-    <button class="categoria-btn">Salgados</button>
-    <button class="categoria-btn">Lanches</button>
-    <button class="categoria-btn">Pizzas</button>
-    <button class="categoria-btn">Tapioca</button>
-    <button class="categoria-btn">Bebidas</button>
-    <button class="categoria-btn">Sucos</button>
-  </div>
-</aside>
-
-
-<!-- Overlay escuro ao abrir o menu -->
-<div id="overlay" class="overlay"></div>
 <main>
+
   <!-- Container onde os produtos aparecem -->
-   <div id="produtosContainer"></div>
- 
+  <div id="produtosContainer" class="produtos-card"></div>
 
-    <!-- Modal Carrinho -->
-    <div id="modalCarrinho" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloCarrinho">
-      <div class="modal-content">
-        <button class="close-btn" id="fecharModalCarrinho" aria-label="Fechar modal">&times;</button>
-        <h2 id="tituloCarrinho">Resumo do Pedido</h2>
-        <div id="itensCarrinho">
-          <!-- Itens do carrinho vão aparecer aqui -->
-        </div>
-
-        <p><strong>Taxa de entrega:</strong> R$ <span id="taxaEntrega">0.00</span></p>
-        <p><strong>Total:</strong> R$ <span id="totalPedido">0.00</span></p>
-
-        <label for="observacoesCarrinho">Observações do pedido:</label>
-        <textarea id="observacoesCarrinho" rows="3" placeholder="Ex: deixar na portaria"></textarea>
-
-        <button id="finalizarPedidoBtn">Finalizar Pedido</button>
-        <button id="btnCancelarCarrinho">Cancelar</button>
+  <!-- Modal Carrinho -->
+  <div id="modalCarrinho" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloCarrinho">
+    <div class="modal-content">
+      <button class="close-btn" id="fecharModalCarrinho" aria-label="Fechar modal">&times;</button>
+      <h2 id="tituloCarrinho">Resumo do Pedido</h2>
+      <div id="itensCarrinho">
+        <!-- Itens do carrinho vão aparecer aqui -->
       </div>
+      <p><strong>Taxa de entrega:</strong> R$ <span id="taxaEntrega">0.00</span></p>
+      <p><strong>Total:</strong> R$ <span id="totalPedido">0.00</span></p>
+      <label for="observacoesCarrinho">Observações do pedido:</label>
+      <textarea id="observacoesCarrinho" rows="3" placeholder="Ex: deixar na portaria"></textarea>
+      <button id="finalizarPedidoBtn">Finalizar Pedido</button>
+      <button id="btnCancelarCarrinho">Cancelar</button>
     </div>
+  </div>
 
-    <!-- Modal Detalhe Produto -->
-    <div id="modalDetalhe" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloModalDetalhe">
-      <div class="modal-content">
-        <button class="close-btn" id="fecharModal" aria-label="Fechar modal">&times;</button>
-        <img id="modalImagem" src="" alt="Imagem do produto" />
-        <h2 id="modalNome" tabindex="0" aria-live="polite"></h2>
-        <p id="modalDescricao"></p>
-        <p><strong>Preço: R$ <span id="modalPreco">0.00</span></strong></p>
-
-        <div class="quantidade-controle" aria-label="Controle de quantidade">
-          <button id="btnDiminuir" aria-label="Diminuir quantidade">−</button>
-          <span id="quantidadeModal" aria-live="polite">1</span>
-          <button id="btnAumentar" aria-label="Aumentar quantidade">+</button>
-        </div>
-
-        <button id="btnAdicionarCarrinho" aria-label="Adicionar ao carrinho">🛒 Adicionar ao carrinho</button>
+  <!-- Modal Detalhe Produto -->
+  <div id="modalDetalhe" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloModalDetalhe">
+    <div class="modal-content">
+      <button class="close-btn" id="fecharModal" aria-label="Fechar modal">&times;</button>
+      <img id="modalImagem" src="" alt="Imagem do produto" />
+      <h2 id="modalNome" tabindex="0" aria-live="polite"></h2>
+      <p id="modalDescricao"></p>
+      <p><strong>Preço: R$ <span id="modalPreco">0.00</span></strong></p>
+      <div class="quantidade-controle" aria-label="Controle de quantidade">
+        <button id="btnDiminuir" aria-label="Diminuir quantidade">−</button>
+        <span id="quantidadeModal" aria-live="polite">0</span>
+        <button id="btnAumentar" aria-label="Aumentar quantidade">+</button>
       </div>
+      <button id="btnAdicionarCarrinho" aria-label="Adicionar ao carrinho">🛒 Adicionar ao carrinho</button>
     </div>
-    <!-- Modal Finalizar Pedido (com nome, telefone, endereço, etc) -->
-    <div id="modalPedido" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloModalPedido">
-      <div class="modal-content">
-        <button class="close-btn" id="fecharModalPedido" aria-label="Fechar modal">&times;</button>
-        <h2 id="tituloModalPedido">Finalize seu pedido</h2>
-        <form id="formPedido">
-          <label for="clienteNome">Nome completo *</label>
-          <input type="text" id="clienteNome" name="clienteNome" required autocomplete="name" />
+  </div>
 
-          <label for="clienteTelefone">Telefone *</label>
-          <input type="tel" id="clienteTelefone" name="clienteTelefone" placeholder="(00) 00000-0000" required autocomplete="tel" />
+  <!-- Modal Finalizar Pedido (com nome, telefone, endereço, etc) -->
+  <div id="modalPedido" class="hidden" aria-modal="true" role="dialog" aria-labelledby="tituloModalPedido">
+    <div class="modal-content">
+      <button class="close-btn" id="fecharModalPedido" aria-label="Fechar modal">&times;</button>
+      <h2 id="tituloModalPedido">Finalize seu pedido</h2>
+      <form id="form-pedido">
+        <label for="cliente-nome">Nome completo *</label>
+        <input type="text" id="cliente-nome" name="cliente-nome" required autocomplete="name" />
+        <label for="cliente-telefone">Telefone *</label>
+        <input type="tel" id="cliente-telefone" name="cliente-telefone" placeholder="(00) 00000-0000" required autocomplete="tel" />
+        <label for="cliente-endereco">Endereço *</label>
+        <input type="text" id="cliente-endereco" name="cliente-endereco" required autocomplete="street-address" />
+        <button type="button" id="abrirMapaBtn">Marcar Localização no Mapa</button>
+        <div id="mapa" style="width: 100%; height: 300px; display: none;"></div>
+        <br><br>
+        <label for="precisa-ligar" style="display: flex; align-items: center; gap: 0.2rem; font-size: 20px; text-align: end;">
+          <input type="checkbox" id="precisa-ligar" name="precisa-ligar" />
+          Precisa ligar antes da entrega?
+        </label>
 
-          <label for="clienteEndereco">Endereço *</label>
-          <input type="text" id="clienteEndereco" name="clienteEndereco" required autocomplete="street-address" />
-  <button type="button" id="abrirMapaBtn">Marcar Localização no Mapa</button>
-  <div id="mapa" style="width: 100%; height: 300px; display: none;"></div>
-
-          <label>
-            <input type="checkbox" id="precisaLigar" name="precisaLigar" />
-            Precisa ligar antes da entrega?
-          </label>
-
-          <label for="observacoesPedido">Observações</label>
-          <textarea id="observacoesPedido" name="observacoesPedido" rows="3" placeholder="Ex: deixar na portaria"></textarea>
-
-          <button type="submit">Enviar pedido</button>
-        </form>
-      </div>
+        <label for="observacoesPedido">Observações</label>
+        <textarea id="observacoes-pedido" name="observacoesPedido" rows="3" placeholder="Ex: deixar na portaria"></textarea>
+        <button type="submit">Enviar pedido</button>
+      </form>
     </div>
+  </div>
 
-    <!-- Elementos para mensagem e resumo da imagem do pedido (podem ficar escondidos) -->
-    <div id="mensagemStatus" style="display:none;position:fixed;top:10px;right:10px;padding:10px;border-radius:5px;color:#fff;z-index:1200;"></div>
-    <div id="resumoImagem" style="display:none;"></div>
+  <!-- Elementos para mensagem e resumo da imagem do pedido (podem ficar escondidos) -->
+  <div id="mensagemStatus" style="display:none;position:fixed;top:10px;right:10px;padding:10px;border-radius:5px;color:#fff;z-index:1200;"></div>
+  <div id="resumoImagem" style="display:none;"></div>
 </main>
-
 
 <footer class="footer">
   <div class="footer-container">
@@ -163,9 +152,9 @@
       <h4>Siga-nos</h4>
       <ul class="social-links">
         <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-<li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-<li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-<li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
       </ul>
     </div>
   </div>
@@ -174,19 +163,11 @@
   </div>
 </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<!-- Firebase App -->
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
-
-<!-- Firestore -->
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
-
-<!-- Auth -->
-<script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
-
-  <script type="module" src="../js/script-client.js" defer></script>
+<!-- Scripts -->
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="../js/script-client.js" defer></script>
 </body>
 </html>
+

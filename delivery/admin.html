@@ -1,113 +1,330 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Painel Administrativo - Lanches da LJ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/style-admin.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Painel Administrativo - Lanches da LJ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style-admin.css" />
 
-  <!-- Ícones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-n..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
+    <!-- Ícones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-n..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- 🔝 Header Superior -->
+    <header class="hidden">
+      <div class="logo-container">
+        <a href="#"
+          ><img
+            class="logo"
+            src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png"
+            alt="Logo"
+        /></a>
+        <span class="admin-user"
+          ><i class="fa fa-user-circle"></i> Olá, administrador!</span
+        >
+        <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+      </div>
+    </header>
 
-  <!-- 🔝 Header Superior -->
-  <header  class="hidden">
-    <div class="logo-container">
-      <a href="#"><img class="logo" src="../img/ChatGPT Image 2 de ago. de 2025, 11_08_23.png" alt="Logo" /></a>
-      <span class="admin-user"><i class="fa fa-user-circle"></i> Olá, administrador!</span>
-      <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
-    </div>
-  </header>
-
-  <main>
-    <!-- 📚 Menu Lateral -->
-    <div class="sidebar hidden">
-      <h2>Painel</h2>
-      <button onclick="mostrarSecao('cadastro')"><i class="fa fa-plus-circle"></i> Cadastrar Produto</button>
-      <button onclick="mostrarSecao('produtos')"><i class="fa fa-box"></i> Produtos</button>
-      <button onclick="mostrarSecao('pedidos')"><i class="fa fa-receipt"></i> Pedidos</button>
-      <button onclick="mostrarSecao('finalizados')"><i class="fa fa-check-circle"></i> Finalizados</button>
-      <button onclick="alternarTema()"><i class="fa fa-moon"></i> Modo Escuro</button>
-      <button onclick="logout()"><i class="fa fa-sign-out-alt"></i> Sair</button>
-    </div>
-
-    <!-- 🔧 Conteúdo Principal -->
-    <div class="main">
-
-      <!-- 🔐 Tela de Login -->
-      <div id="telaLogin" class="card">
-        <h2><i class="fa fa-lock"></i> Login</h2>
-        <input type="password" id="senha" placeholder="Digite a senha" />
-        <button class="primary" onclick="verificarLogin()"><i class="fa fa-sign-in-alt"></i> Entrar</button>
-        <p id="mensagemLogin" style="color: red;"></p>
+    <main>
+      <!-- 📚 Menu Lateral -->
+      <div class="sidebar hidden">
+        <h2>Painel</h2>
+        <button onclick="mostrarSecao('dashbord')">Dashbord</button>
+        <button onclick="mostrarSecao('cadastro')">
+          <i class="fa fa-plus-circle"></i> Cadastrar Produto
+        </button>
+        <button onclick="mostrarSecao('produtos')">
+          <i class="fa fa-box"></i> Produtos
+        </button>
+        <button onclick="mostrarSecao('pedidos')">
+          <i class="fa fa-receipt"></i> Pedidos
+        </button>
+        <button onclick="mostrarSecao('finalizados')">
+          <i class="fa fa-check-circle"></i> Finalizados
+        </button>
+        <button onclick="alternarTema()">
+          <i class="fa fa-moon"></i> Modo Escuro
+        </button>
+        <button onclick="logout()">
+          <i class="fa fa-sign-out-alt"></i> Sair
+        </button>
       </div>
 
-      <!-- 📊 Painel Principal -->
-      <div id="painel" class="card hidden">
-
-        <!-- 📥 Cadastro -->
-        <div id="secao-cadastro" class="secao">
-          <h2><i class="fa fa-plus"></i> Cadastrar Produto</h2>
-          <form id="formProduto">
-            <input type="hidden" id="produtoId" />
-            <input type="text" id="nomeProduto" placeholder="Nome do produto" required />
-            <input type="number" id="precoProduto" placeholder="Preço" step="0.01" />
-            <select id="categoriaProduto" required>
-              <option value="">Selecione a categoria</option>
-              <option value="Salgados">Salgados</option>
-              <option value="Lanches">Lanches</option>
-              <option value="Pizzas">Pizzas</option>
-              <option value="Tapioca">Tapioca</option>
-              <option value="Bebidas">Bebidas</option>
-              <option value="Sucos">Sucos</option>
-            </select>
-            <textarea id="descricaoProduto" placeholder="Descrição do produto" required></textarea>
-            <input type="file" id="imagemProduto" accept="image/*" />
-            <img id="preview" style="width: 100px; display: block; margin: 10px 0;" />
-            <button type="submit"><i class="fa fa-save"></i> Salvar Produto</button>
-            <button type="button" id="cancelarEdicao" style="display:none;"><i class="fa fa-times"></i> Cancelar</button>
-          </form>
+      <!-- 🔧 Conteúdo Principal -->
+      <div class="main">
+        <!-- 🔐 Tela de Login -->
+        <div id="telaLogin" class="card">
+          <h2><i class="fa fa-lock"></i> Login</h2>
+          <input type="password" id="senha" placeholder="Digite a senha" />
+          <button class="primary" onclick="verificarLogin()">
+            <i class="fa fa-sign-in-alt"></i> Entrar
+          </button>
+          <p id="mensagemLogin" style="color: red"></p>
         </div>
 
-        <!-- 📦 Produtos -->
-        <div id="secao-produtos" class="secao hidden">
-          <div class="card">
-            <input type="text" id="buscaProduto" placeholder="Buscar por nome ou categoria...">
+        <div id="secao-dashbord" class="secao">
+  <h1>Dashboard</h1>
+<h2>Configurar Horários e Categorias</h2>
+
+  <!-- Status da loja -->
+<div>
+  <label for="statusLoja">Status da Loja:</label>
+  <select id="statusLoja">
+    <option value="true">Aberta</option>
+    <option value="false">Fechada</option>
+  </select>
+  <button id="btnSalvarStatus">Salvar Status da Loja</button>
+</div>
+  
+
+  <form id="formHorarios">
+    <div>
+      <h3>Manhã</h3>
+      <label>Abertura: <input type="time" id="aberturaManha"></label>
+      <label>Fechamento: <input type="time" id="fechamentoManha"></label>
+      <p><strong>Categorias:</strong></p>
+      <label><input type="checkbox" name="tardeCategorias" value="salgado"> Salgados</label>
+      <label><input type="checkbox" name="tardeCategorias" value="bolo"> Bolos</label>
+      <label><input type="checkbox" name="tardeCategorias" value="doce"> Doces</label>
+      <label><input type="checkbox" name="manhaCategorias" value="cuscuz"> Cuscuz</label>
+      <label><input type="checkbox" name="manhaCategorias" value="cafe">Café</label>
+      <label><input type="checkbox" name="manhaCategorias" value="tapioca"> Tapioca</label>  
+      <label><input type="checkbox" name="manhaCategorias" value="suco">Suco</label>  
+    </div>
+
+    <div>
+      <h3>Tarde</h3>
+      <label>Abertura: <input type="time" id="aberturaTarde"></label>
+      <label>Fechamento: <input type="time" id="fechamentoTarde"></label>
+      <p><strong>Categorias:</strong></p>
+      <label><input type="checkbox" name="tardeCategorias" value="salgado"> Salgados</label>
+      <label><input type="checkbox" name="tardeCategorias" value="bolo"> Bolos</label>
+      <label><input type="checkbox" name="tardeCategorias" value="doce"> Doces</label>
+      <label><input type="checkbox" name="manhaCategorias" value="cuscuz"> Cuscuz</label>
+      <label><input type="checkbox" name="manhaCategorias" value="cafe">Café</label>
+      <label><input type="checkbox" name="manhaCategorias" value="tapioca"> Tapioca</label>  
+      <label><input type="checkbox" name="manhaCategorias" value="suco">Suco</label>  
+    </div>
+
+    <div>
+      <h3>Noite</h3>
+      <label>Abertura: <input type="time" id="aberturaNoite"></label>
+      <label>Fechamento: <input type="time" id="fechamentoNoite"></label>
+      <p><strong>Categorias:</strong></p>
+      <label><input type="checkbox" name="noiteCategorias" value="pizza"> Pizza</label>
+      <label><input type="checkbox" name="noiteCategorias" value="hamburguer"> Hambúrguer</label>
+      <label><input type="checkbox" name="noiteCategorias" value="refrigerante"> Refrigerantes</label>
+      <label><input type="checkbox" name="manhaCategorias" value="suco">Suco</label>  
+    </div>
+
+    <button type="submit">Salvar Configurações</button>
+  </form>
+
+        </div>
+
+        <!-- 📊 Painel Principal -->
+        <div id="painel" class="card hidden">
+          <!-- 📥 Cadastro -->
+          <div id="secao-cadastro" class="secao hidden">
+            <h2><i class="fa fa-plus"></i> Cadastrar Produto</h2>
+            <form id="formProduto">
+              <input type="hidden" id="produtoId" />
+              <input
+                type="text"
+                id="nomeProduto"
+                placeholder="Nome do produto"
+                required
+              />
+              <input
+                type="number"
+                id="precoProduto"
+                placeholder="Preço"
+                step="0.01"
+              />
+              <select id="categoriaProduto" required>
+                <option value="">Selecione a categoria</option>
+                <option value="salgado">Salgados</option>
+                <option value="hamburguer">Hambúrguer</option>
+                <option value="pizza">Pizzas</option>
+                <option value="tapioca">Tapioca</option>
+                <option value="refrigerante">Refrigerantes</option>
+                <option value="cafe">Café</option>
+                <option value="suco">Sucos</option>
+              </select>
+              <label for="disponivelProduto">Disponibilidade:</label>
+              <select id="disponivelProduto" required>
+                <option value="dia todo">Dia todo</option>
+                <option value="manha">Somente pela manhã</option>
+                <option value="tarde">Somente à tarde</option>
+                <option value="noite">Somente à noite</option>
+              </select>
+
+
+              <textarea
+                id="descricaoProduto"
+                placeholder="Descrição do produto"
+                required
+              ></textarea>
+              <input type="file" id="imagemProduto" accept="image/*" />
+              <img
+                id="preview"
+                style="width: 100px; display: block; margin: 10px 0"
+              />
+              <button type="submit">
+                <i class="fa fa-save"></i> Salvar Produto
+              </button>
+              <button type="button" id="cancelarEdicao" style="display: none">
+                <i class="fa fa-times"></i> Cancelar
+              </button>
+            </form>
           </div>
-          <h2><i class="fa fa-box-open"></i> Produtos</h2>
-          <div id="listaProdutos">Carregando produtos...</div>
+
+          <!-- 📦 Produtos -->
+          <div id="secao-produtos" class="secao hidden">
+            <div class="card">
+              <input
+                type="text"
+                id="buscaProduto"
+                placeholder="Buscar por nome ou categoria..."
+              />
+            </div>
+            <h2><i class="fa fa-box-open"></i> Produtos</h2>
+           <div id="listaProdutos">Carregando produtos...</div>
+
+        <!-- Modal para edição -->
+        <div id="modalEditar" class="modal hidden">
+          <div class="modal-content">
+            <span class="close" id="fecharModal">&times;</span>
+            <h2>Editar Produto</h2>
+            <form id="formEditarProduto">
+              <input type="hidden" id="editar-id" />
+              <label>Nome:</label>
+              <input type="text" id="editar-nome" required />
+              <label>Preço:</label>
+              <input type="number" id="editar-preco" required />
+              <label>Categoria:</label>
+              <input type="text" id="editar-categoria" required />
+              <label>Descrição:</label>
+              <textarea id="editar-descricao" required></textarea>
+              <label>Disponibilidade:</label>
+              <select id="editar-disponibilidade" required>
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+                <option value="diaTodo">Dia todo</option>
+              </select>
+              <label>Imagem (URL):</label>
+              <input type="text" id="editar-imagem" required />
+              <button type="submit">Salvar Alterações</button>
+            </form>
+          </div>
         </div>
 
-        <!-- 🛒 Pedidos -->
-        <div id="secao-pedidos" class="secao hidden">
-          <h2><i class="fa fa-shopping-cart"></i> Pedidos</h2>
-          <div id="listaPedidos">Carregando pedidos...</div>
-        </div>
 
-        <!-- ✅ Finalizados -->
-        <div id="secao-finalizados" class="secao hidden">
-          <h2><i class="fa fa-clipboard-check"></i> Pedidos Finalizados</h2>
-          <div id="listaFinalizados"></div>
-        </div>
+          </div>
 
+          <!-- 🛒 Pedidos -->
+                  <div>
+            <h2>Pedidos</h2>
+            
+            <label for="filtroStatus">Filtrar por status:</label>
+            <select id="filtroStatus">
+              <option value="todos">Todos</option>
+              <option value="pendente">Pendente</option>
+              <option value="em_preparo">Em preparo</option>
+              <option value="a_caminho">A caminho</option>
+              <option value="entregue">Entregue</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+
+            <div id="listaPedidos"></div>
+          </div>
+
+
+          <!-- MODAL DETALHES -->
+          <div id="modalDetalhes" class="hidden status-${statusClass}">
+            <div>
+              <button id="btnFecharModal">✖</button>
+
+              <h2>Detalhes do Pedido</h2>
+              <p><strong>Número do Pedido:</strong> <span class="numeroPedido"></span></p>
+              <p><strong>Cliente:</strong> <span class="clienteNome"></span></p>
+              <p><strong>Telefone:</strong> <span class="clienteTelefone"></span></p>
+              <p><strong>Endereço:</strong> <span class="clienteEndereco"></span></p>
+              <p><strong>Data do Pedido:</strong> <span class="dataPedido"></span></p>
+
+              <h3>Itens do Pedido:</h3>
+              <ul class="itensPedido"></ul>
+
+              <p><strong>Taxa de Entrega:</strong> <span class="taxaEntrega"></span></p>
+              <p class="totalPedido" style="font-weight:bold; font-size: 1.2em;"></p>
+
+              <form id="formEditarStatus">
+                <input type="hidden" id="pedidoIdEditar" />
+                <label for="selectStatusPedido"><strong>Status do pedido:</strong></label>
+                <select id="selectStatusPedido" required>
+                  <option value="Pendente">Pendente</option>
+                  <option value="Em preparo">Em preparo</option>
+                  <option value="Saiu para entrega">Saiu para entrega</option>
+                  <option value="Entregue">Entregue</option>
+                  <option value="Cancelado">Cancelado</option>
+                </select>
+
+                <button type="submit">Salvar Status</button>
+              </form>
+                <button type="button" id="btnAbrirModalImprimir">🖨 Imprimir</button>
+            </div>
+            <!-- MODAL IMPRESSÃO -->
+          <div id="modalImprimir" class="hidden">
+            <div class="conteudo-impressao">
+              <button id="btnFecharModalImprimir">✖</button>
+              <h2>Pedido</h2>
+              <p><strong>Cliente:</strong> <span class="clienteNome"></span></p>
+              <p><strong>Data:</strong> <span class="pedidoData"></span></p>
+              <p><strong>Endereço:</strong> <span class="clienteEndereco"></span></p>
+              <p><strong>Telefone:</strong> <span class="clienteTelefone"></span></p>
+              <h3>Itens:</h3>
+              <ul class="itensPedido"></ul>
+              <p><strong>Total:</strong> <span class="totalPedido"></span></p>
+              <p><strong>Observações:</strong> <span class="observacoesPedido"></span></p>
+
+              <button id="btnImprimir">🖨 Imprimir</button>
+            </div>
+          </div>
+          </div>
+          <!-- ✅ Finalizados -->
+          <div id="secao-finalizados" class="secao hidden">
+            <h2><i class="fa fa-clipboard-check"></i> Pedidos Finalizados</h2>
+            <div id="listaFinalizados"></div>
+          </div>
+        </div>
       </div>
-    </div>
-  </main>
+      <div id="notificacao-pedido" class="notificacao-pedido" style="display: none;">
+  📢 Novo pedido recebido!
+  <button id="fechar-notificacao" class="btn-fechar">✖</button>
+</div>
 
-  <!-- 🔥 Firebase compat SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    </main>
 
-  <!-- 🧠 Script principal -->
-  <script type="module" src="../js/script-admin.js"></script>
+    <!-- 🔥 Firebase compat SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- ☰ Menu lateral -->
-  <script>
-    function toggleSidebar() {
-      document.querySelector('.sidebar').classList.toggle('active');
-    }
-  </script>
-</body>
+    <!-- 🧠 Script principal -->
+    <script type="module" src="../js/script-admin.js"></script>
+
+    <!-- ☰ Menu lateral -->
+    <script>
+      function toggleSidebar() {
+        document.querySelector(".sidebar").classList.toggle("active");
+      }
+    </script>
+  </body>
 </html>
-
