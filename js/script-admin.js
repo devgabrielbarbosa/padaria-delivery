@@ -783,28 +783,33 @@ async function alterarStatus(pedidoId, novoStatus) {
   try {
     const pedidoRef = doc(db, "pedidos", pedidoId);
     await updateDoc(pedidoRef, { status: novoStatus });
-    
-    // Atualizar visual do pedido na tela
+
     const pedidoElem = document.querySelector(`.pedido[data-id="${pedidoId}"]`);
-    if (pedidoElem) {
-      // Remove classes antigas de status que controlam a cor de fundo
-      for (const c of pedidoElem.classList) {
-        if (c.startsWith("status-bg-")) {
-          pedidoElem.classList.remove(c);
-        }
+    if (!pedidoElem) return;
+
+    // Atualiza classes de status no pedido
+    for (const c of pedidoElem.classList) {
+      if (c.startsWith("status-bg-")) pedidoElem.classList.remove(c);
+    }
+    const statusClass = novoStatus.toLowerCase().replace(/\s+/g, "-");
+    pedidoElem.classList.add(`status-bg-${statusClass}`);
+
+    // Atualiza label
+    const statusLabel = pedidoElem.querySelector(".status-label");
+    if (statusLabel) {
+      statusLabel.textContent = novoStatus;
+      statusLabel.className = "status-label";
+      statusLabel.classList.add(`status-${statusClass}`);
+    }
+
+    // Mover para a seção finalizados se entregue
+    if (novoStatus === "entregue") {
+      const finalizadosContainer = document.getElementById("listaPedidosFinalizados");
+      if (finalizadosContainer) {
+        pedidoElem.remove(); // tira da lista atual
+        finalizadosContainer.appendChild(pedidoElem); // adiciona nos finalizados
       }
-      
-      // Cria a classe nova baseada no novoStatus (ex: "entregue" vira "status-bg-entregue")
-      const statusClass = novoStatus.toLowerCase().replace(/\s+/g, "-");
-      pedidoElem.classList.add(`status-bg-${statusClass}`);
-      
-      // Atualiza o texto do label do status, se tiver
-      const statusLabel = pedidoElem.querySelector(".status-label");
-      if (statusLabel) {
-        statusLabel.textContent = novoStatus;
-        statusLabel.className = "status-label"; // reset class
-        statusLabel.classList.add(`status-${statusClass}`);
-      }
+      mostrarSecao("finalizados"); // mostra a seção finalizados
     }
 
     alert(`Status do pedido atualizado para: ${novoStatus}`);
@@ -813,6 +818,7 @@ async function alterarStatus(pedidoId, novoStatus) {
     alert("Erro ao atualizar status do pedido.");
   }
 }
+
 
 document.getElementById("formEditarStatus").addEventListener("submit", async (e) => {
   e.preventDefault(); // Impede o reload da página
@@ -1101,14 +1107,11 @@ document.addEventListener('DOMContentLoaded', () => {
  * @param {string} secao - ID da seção a ser mostrada (sem o prefixo "secao-")
  */
 function mostrarSecao(secao) {
-  if (!secao) return; // evita esconder tudo se parâmetro vazio ou indefinido
-
-  // Esconde todas as seções
-  document.querySelectorAll('.secao').forEach(s => s.classList.add('hidden'));
-
-  // Mostra a seção alvo
-  const secaoAlvo = document.getElementById(`secao-${secao}`);
-  if (secaoAlvo) secaoAlvo.classList.remove('hidden');
+  document.querySelectorAll('.secao').forEach(s => {
+    s.classList.add('hidden');
+  });
+  const alvo = document.getElementById(`secao-${secao}`);
+  if (alvo) alvo.classList.remove('hidden');
 }
 
 
@@ -1135,6 +1138,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Carrega as configurações da loja para o admin
   carregarConfiguracoesAdmin();
 });
+
+
 
 // Expõe funções globais para o HTML
 window.verificarLogin = verificarLogin || (() => console.warn("verificarLogin não definida"));

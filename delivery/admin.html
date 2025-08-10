@@ -69,7 +69,7 @@
           <p id="mensagemLogin" style="color: red"></p>
         </div>
 
-        <div id="secao-dashbord" class="secao">
+        <div id="secao-dashbord" class="secao hidden">
   <h1>Dashboard</h1>
 <h2>Configurar Horários e Categorias</h2>
 
@@ -231,21 +231,26 @@
           </div>
 
           <!-- 🛒 Pedidos -->
-                  <div>
-            <h2>Pedidos</h2>
-            
-            <label for="filtroStatus">Filtrar por status:</label>
-            <select id="filtroStatus">
-              <option value="todos">Todos</option>
-              <option value="pendente">Pendente</option>
-              <option value="em_preparo">Em preparo</option>
-              <option value="a_caminho">A caminho</option>
-              <option value="entregue">Entregue</option>
-              <option value="cancelado">Cancelado</option>
-            </select>
+  <div id="secao-pedidos" class="secao hidden">
+  <h2>Pedidos</h2>
+  
+  <label for="filtroStatus">Filtrar por status:</label>
+  <select id="filtroStatus">
+    <option value="todos">Todos</option>
+    <option value="pendente">Pendente</option>
+    <option value="em_preparo">Em preparo</option>
+    <option value="a_caminho">A caminho</option>
+    <option value="entregue">Entregue</option>
+    <option value="cancelado">Cancelado</option>
+  </select>
 
-            <div id="listaPedidos"></div>
+  <div id="listaPedidos"></div>
+   <!-- ✅ Finalizados -->
+          <div id="secao-finalizados" class="secao hidden">
+            <h2><i class="fa fa-clipboard-check"></i> Pedidos Finalizados</h2>
+            <div id="listaPedidosFinalizados"></div>
           </div>
+</div>
 
 
           <!-- MODAL DETALHES -->
@@ -254,7 +259,7 @@
               <button id="btnFecharModal">✖</button>
 
               <h2>Detalhes do Pedido</h2>
-              <p><strong>Número do Pedido:</strong> <span class="numeroPedido"></span></p>
+              <p><strong>Número do Pedido: #</strong> <span class="numeroPedido"></span></p>
               <p><strong>Cliente:</strong> <span class="clienteNome"></span></p>
               <p><strong>Telefone:</strong> <span class="clienteTelefone"></span></p>
               <p><strong>Endereço:</strong> <span class="clienteEndereco"></span></p>
@@ -270,11 +275,11 @@
                 <input type="hidden" id="pedidoIdEditar" />
                 <label for="selectStatusPedido"><strong>Status do pedido:</strong></label>
                 <select id="selectStatusPedido" required>
-                  <option value="Pendente">Pendente</option>
-                  <option value="Em preparo">Em preparo</option>
-                  <option value="Saiu para entrega">Saiu para entrega</option>
-                  <option value="Entregue">Entregue</option>
-                  <option value="Cancelado">Cancelado</option>
+                  <option value="pendente">Pendente</option>
+                  <option value="em preparo">Em preparo</option>
+                  <option value="saiu para entrega">Saiu para entrega</option>
+                  <option value="entregue">Entregue</option>
+                  <option value="cancelado">Cancelado</option>
                 </select>
 
                 <button type="submit">Salvar Status</button>
@@ -299,13 +304,10 @@
             </div>
           </div>
           </div>
-          <!-- ✅ Finalizados -->
-          <div id="secao-finalizados" class="secao hidden">
-            <h2><i class="fa fa-clipboard-check"></i> Pedidos Finalizados</h2>
-            <div id="listaFinalizados"></div>
-          </div>
+        
         </div>
       </div>
+
       <div id="notificacao-pedido" class="notificacao-pedido" style="display: none;">
   📢 Novo pedido recebido!
   <button id="fechar-notificacao" class="btn-fechar">✖</button>

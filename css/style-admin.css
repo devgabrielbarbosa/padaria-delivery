@@ -82,6 +82,10 @@ background-color: #0056b3;
 .hidden {
 display: none !important;
 }
+.secao.hidden {
+  display: none;
+}
+
 
 .logo-container {
 display: flex;
@@ -594,19 +598,26 @@ transition: background-color 0.3s ease;
 .pedido-card button:hover {
 background-color: #0056b3;
 }
+
 #modalDetalhes {
 display: none;
 position: fixed;
-top: 0; left: 0; right: 0; bottom: 0;
 background: rgba(0, 0, 0, 0.6);
 z-index: 9999;
+width: 500px;
 
 /* Centralizar conteúdo */
 display: flex;
 align-items: center;
 justify-content: center;
-padding: 20px;
+height: 100%;
+padding: 2px;
+overflow-y: auto;      /* Fica preso na tela */
+top: 50%;              /* Posição vertical no meio */
+left: 50%;             /* Posição horizontal no meio */
+transform: translate(-50%, -50%); /* Ajusta para centralizar de verdade */
 }
+
 
 #modalDetalhes > div {
 background: #fff;
@@ -1036,5 +1047,36 @@ font-size: 18px;
 display: block;
 width: 100%;
 text-align: left;
+}
+#modalDetalhes {
+display: none;
+position: fixed;
+background: rgba(0, 0, 0, 0.6);
+z-index: 9999;
+max-width: 300px;
+
+/* Centralizar conteúdo */
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+padding: 2px;
+overflow-y: auto;      /* Fica preso na tela */
+top: 50%;              /* Posição vertical no meio */
+left: 50%;             /* Posição horizontal no meio */
+transform: translate(-50%, -50%); /* Ajusta para centralizar de verdade */
+}
+
+
+
+#modalDetalhes > div {
+background: #fff;
+max-width: 500px;
+width: 100%;
+border-radius: 10px;
+padding: 30px 25px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: #333;
 }
 }
