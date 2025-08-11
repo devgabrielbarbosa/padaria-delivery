@@ -134,7 +134,7 @@ Inserir a senha correta
 Gerenciar produtos e pedidos
 
 📱 Cliente
-Abrir index.html
+Abrir [index.html](https://devgabrielbarbosa.github.io/padaria-delivery/delivery/login)
 
 Adicionar produtos ao carrinho
 
