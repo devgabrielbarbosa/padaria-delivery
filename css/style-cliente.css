@@ -22,7 +22,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #fff;
   color: #333;
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 body.bloqueado {
